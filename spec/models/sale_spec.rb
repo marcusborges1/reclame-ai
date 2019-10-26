@@ -7,4 +7,7 @@ RSpec.describe Sale, type: :model do
   it { is_expected.to validate_presence_of(:total_value) }
 
   it { is_expected.to validate_uniqueness_of(:order_number) }
+
+  it { is_expected.to have_many(:sub_sales) }
+  it { is_expected.to have_many(:items).through(:sub_sales) }
 end
