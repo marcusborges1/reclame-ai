@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_26_125109) do
+ActiveRecord::Schema.define(version: 2019_10_26_131129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,4 +35,17 @@ ActiveRecord::Schema.define(version: 2019_10_26_125109) do
     t.index ["order_number"], name: "index_sales_on_order_number", unique: true
   end
 
+  create_table "sub_sales", force: :cascade do |t|
+    t.bigint "item_id", null: false
+    t.bigint "sale_id", null: false
+    t.integer "quantity", null: false
+    t.integer "subtotal", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_sub_sales_on_item_id"
+    t.index ["sale_id"], name: "index_sub_sales_on_sale_id"
+  end
+
+  add_foreign_key "sub_sales", "items"
+  add_foreign_key "sub_sales", "sales"
 end
