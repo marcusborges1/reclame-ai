@@ -10,4 +10,7 @@ RSpec.describe Item, type: :model do
 
   it { is_expected.to validate_uniqueness_of(:name).case_insensitive    }
   it { is_expected.to validate_uniqueness_of(:barcode).case_insensitive }
+
+  it { is_expected.to have_many(:sub_sales) }
+  it { is_expected.to have_many(:sales).through(:sub_sales) }
 end
