@@ -41,7 +41,7 @@ RSpec.describe 'Complaints API', type: :request do
       end
     end
 
-    context 'with invalid order_number' do
+    context 'with invalid params' do
       let(:invalid_attributes) {
         {
           complaint: {
