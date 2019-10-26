@@ -28,9 +28,16 @@ RSpec.describe 'Complaints API', type: :request do
         }
       }
 
+      before { create(:sale, order_number: '123') }
+
       it 'returns a successful response' do
         post '/complaints', params: valid_attributes
         expect(response).to be_successful
+      end
+
+      it 'creates a new complaint' do
+        expect { post '/complaints', params: valid_attributes }
+          .to change { Complaint.count }.by(1)
       end
     end
   end
