@@ -9,7 +9,7 @@ class ComplaintsController < ApplicationController
 
     @complaint = Complaint.create(complaint_attributes)
     if @complaint.save
-      redirect_to root_path(@complaint)
+      redirect_to root_path(@complaint), notice: 'Reclamação criada com sucesso'
     else
       render :new
     end
