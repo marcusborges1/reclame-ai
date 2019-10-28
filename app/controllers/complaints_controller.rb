@@ -7,7 +7,7 @@ class ComplaintsController < ApplicationController
     sale = Sale.find_by(order_number: sale_params[:order_number])
     complaint_attributes = complaint_params.merge(sale: sale)
 
-    @complaint = Complaint.create(complaint_attributes)
+    @complaint = Complaint.new(complaint_attributes)
     if @complaint.save
       redirect_to root_path(@complaint), notice: 'Reclamação criada com sucesso'
     else
