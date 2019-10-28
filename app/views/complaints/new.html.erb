@@ -1,1 +1,50 @@
 <h1>Reclame aí</h1>
+
+<%= form_with model: @complaint, local: true do |form| %>
+  <% if @complaint.errors.any? %>
+    <div>
+      <h2><%= pluralize(@complaint.errors.count, "error") %> prohibited this
+        complaint from being registered:</h2>
+
+      <ul>
+        <% @complaint.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, 'Nome Completo *' %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :email, 'Email *' %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div>
+    <%= form.label :phone_number, 'Telefone' %>
+    <%= form.text_field :phone_number %>
+  </div>
+
+  <div>
+    <%= form.label :order_number, 'Número do Pedido *' %>
+    <%= form.text_field :order_number %>
+  </div>
+
+  <div>
+    <%= form.label :delivery_cpf, 'CPF da entrega *' %>
+    <%= form.text_field :delivery_cpf %>
+  </div>
+
+  <div>
+    <%= form.label :description, 'Descrição do Ocorrido *' %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

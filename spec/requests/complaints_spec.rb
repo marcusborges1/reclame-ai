@@ -59,6 +59,11 @@ RSpec.describe 'Complaints API', type: :request do
         expect { post '/complaints', params: invalid_attributes }
           .to_not change { Complaint.count }
       end
+
+      it 'returns a sucessful response' do
+        post '/complaints', params: invalid_attributes
+        expect(response).to be_successful
+      end
     end
   end
 end

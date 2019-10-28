@@ -1,12 +1,18 @@
 class ComplaintsController < ApplicationController
   def new
+    @complaint = Complaint.new
   end
 
   def create
     sale = Sale.find_by(order_number: sale_params[:order_number])
     complaint_attributes = complaint_params.merge(sale: sale)
-    Complaint.create(complaint_attributes)
-    redirect_to root_path
+
+    @complaint = Complaint.create(complaint_attributes)
+    if @complaint.save
+      redirect_to root_path(@complaint)
+    else
+      render :new
+    end
   end
 
   private
