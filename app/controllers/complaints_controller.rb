@@ -4,7 +4,7 @@ class ComplaintsController < ApplicationController
   end
 
   def create
-    sale = Sale.find_by(order_number: sale_params[:order_number])
+    sale = Sale.find_by(order_number: complaint_params[:order_number])
     complaint_attributes = complaint_params.merge(sale: sale)
 
     @complaint = Complaint.new(complaint_attributes)
@@ -18,10 +18,7 @@ class ComplaintsController < ApplicationController
   private
 
   def complaint_params
-    params.require(:complaint).permit(:name, :email, :phone_number, :description)
-  end
-
-  def sale_params
-    params.require(:complaint).permit(:order_number, :delivery_cep)
+    params.require(:complaint).permit(:name, :email, :phone_number, :description,
+      :order_number, :delivery_cep)
   end
 end
