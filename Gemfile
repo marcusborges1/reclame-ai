@@ -39,6 +39,7 @@ group :test do
   gem 'factory_bot_rails', '~> 5.1'
   gem 'shoulda-matchers', '~> 4.1'
   gem 'database_cleaner', '~> 1.7'
+  gem 'webmock', '~> 3.7'
 end
 
 group :development do
