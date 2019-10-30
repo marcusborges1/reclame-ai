@@ -9,6 +9,7 @@ class ComplaintsController < ApplicationController
 
     @complaint = Complaint.new(complaint_attributes)
     if @complaint.save
+      DetermineComplaintSafetyJob.perform_later(request.remote_ip, @complaint.delivery_cep)
       redirect_to root_path(@complaint), notice: 'Reclamação criada com sucesso'
     else
       render :new
