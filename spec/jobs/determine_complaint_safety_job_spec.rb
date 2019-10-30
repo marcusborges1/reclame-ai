@@ -41,6 +41,41 @@ RSpec.describe DetermineComplaintSafetyJob, type: :job do
     end
   end
 
-  describe '#perform(*args)' do
+  describe '#perform(request_ip, complaint)' do
+    let(:complaint)   { create(:complaint) }
+    let(:request_ip)  { '164.41.76.162' }
+    let(:job)         { DetermineComplaintSafetyJob.new }
+
+    context 'when distance between request_ip and delivery_cep coordinates are <= 150 km' do
+      before do
+        allow(IpGeolocation).to receive(:fetch_latitude_and_longitude).
+          and_return(['-23.5503099','-46.6363896'])
+
+        allow(job).to receive(:coordinates_of).
+          and_return(['-23.6137715','-46.6924706'])
+      end
+
+      it 'updates complaint trust_rating to :safe' do
+        job.perform(request_ip, complaint)
+        complaint.reload
+        expect(complaint.trust_rating).to eq('safe')
+      end
+    end
+
+    context 'when distance between request_ip and delivery_cep coordinates are > 150 km' do
+      before do
+        allow(IpGeolocation).to receive(:fetch_latitude_and_longitude).
+          and_return(['-23.5503099','-46.6363896'])
+
+        allow(job).to receive(:coordinates_of).
+          and_return(['-15.7877054','-47.8789594'])
+      end
+
+      it 'updates complaint trust_rating to :suspect' do
+        job.perform(request_ip, complaint)
+        complaint.reload
+        expect(complaint.trust_rating).to eq('suspect')
+      end
+    end
   end
 end
