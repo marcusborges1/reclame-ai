@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe DetermineComplaintSafetyJob, type: :job do
+  it 'matches with enqueued job' do
+    ActiveJob::Base.queue_adapter = :test
+    expect {
+      DetermineComplaintSafetyJob.perform_later
+    }.to have_enqueued_job(DetermineComplaintSafetyJob)
+  end
+
   describe '#coordinates_of(delivery_cep)' do
     context 'with a valid cep' do
       let(:delivery_cep) { '01001000' }
