@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_29_145009) do
+ActiveRecord::Schema.define(version: 2019_10_30_033719) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 2019_10_29_145009) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "trust_rating", default: 0, null: false
+    t.string "order_number", null: false
+    t.string "delivery_cep", null: false
     t.index ["sale_id"], name: "index_complaints_on_sale_id"
   end
 
