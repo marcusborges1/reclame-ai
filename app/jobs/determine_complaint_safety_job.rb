@@ -9,8 +9,8 @@ class DetermineComplaintSafetyJob < ApplicationJob
     geocoder_location = Geocoder.search(query).first.coordinates
   end
 
-  def perform(request_ip, complaint)
-    request_coordinates = IpGeolocation.fetch_latitude_and_longitude(request_ip)
+  def perform(complaint)
+    request_coordinates = IpGeolocation.fetch_latitude_and_longitude(complaint.request_ip)
     delivery_cep_coordinates = coordinates_of(complaint.delivery_cep)
 
     distance_between_locations = Geocoder::Calculations.distance_between(
