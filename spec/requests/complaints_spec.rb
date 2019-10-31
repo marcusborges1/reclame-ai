@@ -8,8 +8,8 @@ RSpec.describe 'Complaints API', type: :request do
       expect(response).to be_successful
     end
 
-    it 'returns a sucessful response' do
-      expect(response.body).to include('Reclame aí')
+    it 'returns a page with a title header "Reclame aí"' do
+      expect(response.body).to include('<h1>Reclame aí</h1>')
     end
   end
 
