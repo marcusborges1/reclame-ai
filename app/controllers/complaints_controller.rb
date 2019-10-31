@@ -1,4 +1,7 @@
 class ComplaintsController < ApplicationController
+  def index
+  end
+
   def new
     @complaint = Complaint.new
   end

@@ -13,6 +13,13 @@ RSpec.describe 'Complaints API', type: :request do
     end
   end
 
+  describe 'GET /complaints' do
+    it 'returns a sussceful response' do
+      get '/complaints'
+      expect(response).to be_successful
+    end
+  end
+
   describe 'POST /complaints' do
     context 'with valid params' do
       let(:valid_attributes) {
