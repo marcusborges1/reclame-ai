@@ -9,7 +9,7 @@ class ComplaintsController < ApplicationController
 
     @complaint = Complaint.new(complaint_attributes)
     if @complaint.save
-      DetermineComplaintSafetyJob.perform_later(request.remote_ip, @complaint.delivery_cep)
+      DetermineComplaintSafetyJob.perform_later(remote_ip, @complaint)
       redirect_to root_path(@complaint), notice: 'Reclamação criada com sucesso'
     else
       render :new
@@ -17,6 +17,14 @@ class ComplaintsController < ApplicationController
   end
 
   private
+
+  def remote_ip
+    if Rails.env.production?
+      request.remote_ip
+    else
+      Net::HTTP.get(URI.parse('http://checkip.amazonaws.com/')).squish
+    end
+  end
 
   def complaint_params
     params.require(:complaint).permit(:name, :email, :phone_number, :description,
