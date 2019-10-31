@@ -21,6 +21,11 @@ RSpec.describe 'Complaints API', type: :request do
   end
 
   describe 'POST /complaints' do
+    before do
+    stub_request(:get, "http://checkip.amazonaws.com/").
+      to_return(body: "189.27.26.198")
+    end
+
     context 'with valid params' do
       let(:valid_attributes) {
         {

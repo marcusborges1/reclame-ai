@@ -7,6 +7,7 @@ RSpec.describe Complaint, type: :model do
   it { is_expected.to validate_presence_of(:order_number) }
   it { is_expected.to validate_presence_of(:delivery_cep) }
   it { is_expected.to validate_presence_of(:trust_rating) }
+  it { is_expected.to validate_presence_of(:request_ip) }
 
   it { is_expected.to define_enum_for(:trust_rating)
     .with_values([:not_verified, :safe, :suspect]) }

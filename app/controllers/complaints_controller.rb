@@ -11,7 +11,7 @@ class ComplaintsController < ApplicationController
     sale = Sale.find_by(order_number: complaint_params[:order_number])
     complaint_attributes = complaint_params.merge(sale: sale)
 
-    @complaint = Complaint.new(complaint_attributes)
+    @complaint = Complaint.new(complaint_attributes.merge(request_ip: remote_ip))
     if @complaint.save
       DetermineComplaintSafetyJob.perform_later(remote_ip, @complaint)
       redirect_to root_path(@complaint), notice: 'Reclamação criada com sucesso'

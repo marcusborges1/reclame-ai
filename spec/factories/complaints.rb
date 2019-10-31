@@ -7,6 +7,7 @@ FactoryBot.define do
     trust_rating    { 'not_verified' }
     order_number    { '123' }
     delivery_cep    { '01001000' }
+    request_ip      { '189.27.26.198' }
 
     sale
   end
