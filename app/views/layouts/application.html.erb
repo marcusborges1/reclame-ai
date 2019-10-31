@@ -11,6 +11,10 @@
 
   <body>
     <%= flash[:notice] %>
+    <div>
+      <span><%= link_to 'Visão do usuário', root_path %></span>
+      - <span><%= link_to 'Visão do atendente', complaints_path %></span>
+    </div>
     <%= yield %>
   </body>
 </html>
