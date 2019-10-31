@@ -1,24 +1,21 @@
-# README
+# Reclama aí
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Prerequisites
 
-Things you may want to cover:
+- rails 6.0.0
+- ruby 2.6.3
+- redis-server >= 4.0
 
-* Ruby version
+## Running project (after git clone)
 
-* System dependencies
+1. Run redis-server on terminal
+`$ redis-server`
+2. In another tab sets up the database
+`$ rails db:setup`
+`$ rails db:migrate`
+`$ rails db:seed`
+3 - Run the server
+`$ rails s`
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+##### What are valid order_number values?
+- `123` and `456`
