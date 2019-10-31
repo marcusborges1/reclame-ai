@@ -10,6 +10,7 @@
       <th>Celular</th>
       <th>Descrição do ocorrido</th>
       <th>CEP do pedido</th>
+      <th>IP da requisição</th>
     </tr>
   </thead>
   <tbody>
@@ -22,6 +23,7 @@
         <td><%= complaint.phone_number %></td>
         <td><%= complaint.description %></td>
         <td><%= complaint.delivery_cep %></td>
+        <td><%= complaint.request_ip %></td>
       </tr>
     <% end %>
   </tbody>
